@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Colección</title>
+</head>
+<body>
+    <h1>Seleccione una Colección</h1>
+    <form action="/show_collection" method="post">
+        <input type="hidden" name="user" value="{{ request.form['user'] }}">
+        <input type="hidden" name="passwd" value="{{ request.form['passwd'] }}">
+        <label for="collection_name">Colección:</label>
+        <select name="collection_name" id="collection_name">
+            {% for collection in collections %}
+                <option value="{{ collection }}">{{ collection }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Ver Documentos">
+    </form>
+    <br>
+    <a href="/">Volver</a>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentos de {{ collection_name }}</title>
+</head>
+<body>
+    <h1>Documentos de la Colección: {{ collection_name }}</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                {% if collection_name == 'products' %}
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Precio</th>
+                    <th>Especificaciones</th>
+                    <th>Disponibilidad</th>
+                    <th>Categoría</th>
+                {% elif collection_name == 'customers' %}
+                    <th>User ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Fecha de Registro</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for documento in documentos %}
+                <tr>
+                    {% if collection_name == 'products' %}
+                        <td>{{ documento.name }}</td>
+                        <td>{{ documento.brand }}</td>
+                        <td>${{ documento.price }}</td>
+                        <td>
+                            Procesador: {{ documento.specs.processor }}<br>
+                            RAM: {{ documento.specs.ram }}<br>
+                            Almacenamiento: {{ documento.specs.storage }}<br>
+                            Pantalla: {{ documento.specs.screen_size }}
+                        </td>
+                        <td>{{ 'Disponible' if documento.available else 'No disponible' }}</td>
+                        <td>{{ documento.category }}</td>
+                    {% elif collection_name == 'customers' %}
+                        <td>{{ documento.user_id }}</td>
+                        <td>{{ documento.nombre }}</td>
+                        <td>{{ documento.email }}</td>
+                        <td>{{ documento.telefono }}</td>
+                        <td>{{ documento.direccion.calle }}, {{ documento.direccion.numero }}, {{ documento.direccion.ciudad }}, {{ documento.direccion.provincia }} - {{ documento.direccion.codigo_postal }}</td>
+                        <td>{{ documento.fecha_registro }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/">Volver</a>
+</body>
+</html>
