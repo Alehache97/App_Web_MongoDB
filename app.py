@@ -15,7 +15,7 @@ def select():
     database_name = request.form.get("database")
 
     try:
-        conexion = MongoClient('192.168.1.146', 27017, username=user, password=passwd, authSource=database_name, authMechanism='SCRAM-SHA-256')
+        conexion = MongoClient('192.168.1.146', 27017, username=user, password=passwd, authMechanism='SCRAM-SHA-256')
         db = conexion[database_name]
         collections = db.list_collection_names()
 
@@ -33,7 +33,7 @@ def show_collection():
     collection_name = request.form.get("collection_name")
 
     try:
-        conexion = MongoClient('192.168.1.146', 27017, username=user, password=passwd, authSource=database_name, authMechanism='SCRAM-SHA-256')
+        conexion = MongoClient('192.168.1.146', 27017, username=user, password=passwd, authMechanism='SCRAM-SHA-256')
         db = conexion[database_name]
         collection = db[collection_name]
         documentos = list(collection.find())
