@@ -4,15 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <h1>Iniciar Sesión</h1>
-    <form action="/select" method="post">
+    
+    <!-- Mensaje de error -->
+    {% if error %}
+        <div class="error-message">{{ error }}</div>
+    {% endif %}
+    
+    <form id="login-form" action="/select" method="post">
         <label>Usuario:</label>
         <input type="text" name="user" placeholder="Introduzca usuario..." required>
         <br><br>
         <label>Contraseña:</label>
         <input type="password" name="passwd" placeholder="Introduzca contraseña..." required>
+        <br><br>
+        <label>Nombre de la base de datos:</label>
+        <input type="text" name="database" placeholder="Introduzca el nombre de la base de datos..." required>
         <br><br>
         <input type="submit" value="Iniciar sesión">
     </form>

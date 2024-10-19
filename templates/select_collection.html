@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar Colección</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Seleccione una Colección</h1>
-    <form action="/show_collection" method="post">
-        <input type="hidden" name="user" value="{{ request.form['user'] }}">
-        <input type="hidden" name="passwd" value="{{ request.form['passwd'] }}">
+    <form id="select-form" action="/show_collection" method="post">
+        <h1>Seleccione una Colección</h1>
+        
+        <!-- Mensaje de error -->
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
+        
+        <input type="hidden" name="user" value="{{ user }}">
+        <input type="hidden" name="passwd" value="{{ passwd }}">
+        <input type="hidden" name="database" value="{{ database }}">
         <label for="collection_name">Colección:</label>
         <select name="collection_name" id="collection_name">
             {% for collection in collections %}
@@ -20,6 +28,8 @@
         <input type="submit" value="Ver Documentos">
     </form>
     <br>
-    <a href="/">Volver</a>
+    <div style="text-align: center;">
+        <a href="/">Volver</a>
+    </div>
 </body>
 </html>

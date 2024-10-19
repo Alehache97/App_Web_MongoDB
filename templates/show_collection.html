@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentos de {{ collection_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<body id="documents-page">
     <h1>Documentos de la Colección: {{ collection_name }}</h1>
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 {% if collection_name == 'products' %}
@@ -54,7 +55,5 @@
             {% endfor %}
         </tbody>
     </table>
-    <br>
-    <a href="/">Volver</a>
 </body>
 </html>
