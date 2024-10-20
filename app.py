@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect
 from pymongo import MongoClient, errors
 
 app = Flask(__name__)
@@ -23,7 +23,7 @@ def select():
         
     except errors.PyMongoError:
         error = 'Error al conectar a la base de datos. Verifica tus credenciales.'
-        return redirect(url_for('index', error=error))
+        return render_template('index.html', error=error)
 
 @app.route('/show_collection', methods=['POST'])
 def show_collection():
