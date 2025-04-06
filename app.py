@@ -15,12 +15,13 @@ def select():
     database_name = request.form.get("database")
 
     try:
-        conexion = MongoClient('192.168.1.146', 27017, username=user, password=passwd, authMechanism='SCRAM-SHA-256')
+        # Conexión
+        conexion = MongoClient('192.168.1.147', 27017, username=user, password=passwd)
         db = conexion[database_name]
-        collections = db.list_collection_names()
+        collections = db.list_collection_names()  # Obtenemos las colecciones
 
         return render_template('select_collection.html', collections=collections, user=user, passwd=passwd, database=database_name)
-        
+
     except errors.PyMongoError:
         error = 'Error al conectar a la base de datos. Verifica tus credenciales.'
         return render_template('index.html', error=error)
@@ -33,7 +34,7 @@ def show_collection():
     collection_name = request.form.get("collection_name")
 
     try:
-        conexion = MongoClient('192.168.1.146', 27017, username=user, password=passwd, authMechanism='SCRAM-SHA-256')
+        conexion = MongoClient('192.168.1.147', 27017, username=user, password=passwd)
         db = conexion[database_name]
         collection = db[collection_name]
         documentos = list(collection.find())
@@ -43,6 +44,7 @@ def show_collection():
     except errors.PyMongoError:
         error = 'No tienes permisos para ver esta colección.'
         return render_template('select_collection.html', error=error, collections=db.list_collection_names(), user=user, passwd=passwd, database=database_name)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
